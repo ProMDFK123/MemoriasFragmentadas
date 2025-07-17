@@ -10,10 +10,15 @@ public class GameSaver : MonoBehaviour
     public void SaveGame()
     {
         PlayerPrefs.SetString("SavedScene", SceneManager.GetActiveScene().name);
-        PlayerPrefs.SetFloat("PlayerX", playerTransform.position.x);
-        PlayerPrefs.SetFloat("PlayerY", playerTransform.position.y);
+
+        if (playerTransform != null)
+        {
+            PlayerPrefs.SetFloat("PlayerX", playerTransform.position.x);
+            PlayerPrefs.SetFloat("PlayerY", playerTransform.position.y);
+        }
+
         PlayerPrefs.Save();
-        Debug.Log("Juego guardado.");
+        Debug.Log("Juego guardado");
     }
 
     public void LoadGame()
@@ -22,8 +27,8 @@ public class GameSaver : MonoBehaviour
         {
             float x = PlayerPrefs.GetFloat("PlayerX");
             float y = PlayerPrefs.GetFloat("PlayerY");
-
             playerTransform.position = new Vector2(x, y);
+            Debug.Log("Posición cargada");
         }
     }
 }
