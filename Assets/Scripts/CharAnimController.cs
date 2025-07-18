@@ -45,11 +45,6 @@ public class CharAnimController : MonoBehaviour
         isRunning = Input.GetKey(KeyCode.LeftShift);
         isGrounded = CheckGrounded();
 
-        foreach (var param in animator.parameters)
-        {
-            Debug.Log($"Animator parameter: {param.name}");
-        }
-
         // Salto
         if (Input.GetKeyDown(KeyCode.W) && isGrounded)
         {
