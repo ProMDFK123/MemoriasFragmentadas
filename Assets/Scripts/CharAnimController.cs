@@ -4,29 +4,28 @@ using UnityEngine;
 
 public class CharAnimController : MonoBehaviour
 {
-    //Movimiento
+    // Movimiento
     public float walkSpeed = 2f;
     public float runSpeed = 4f;
     public float jumpForce = 5f;
 
-    //Sonidos
+    // Sonidos
     public AudioClip walkSound;
     public AudioClip runSound;
     public AudioClip jumpSound;
 
-    //Componentes
+    // Componentes
     private Rigidbody2D rb;
     private Animator animator;
     private AudioSource audioSource;
 
-    //Estado del personaje
+    // Estado
     private float horizontalInput;
     private bool isRunning;
     private bool isGrounded;
-    private bool isJumping;
     private bool facingRight = true;
 
-    //Ground check
+    // Ground check
     public Transform groundCheck;
     public float groundCheckRadius = 0.1f;
     public LayerMask groundLayer;
@@ -36,59 +35,49 @@ public class CharAnimController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
+        rb.freezeRotation = true;
     }
 
-   void Update()
+    void Update()
     {
-        // Entrada horizontal con A y D
-        horizontalInput = 0f;
-        if (Input.GetKey(KeyCode.A)) horizontalInput = -1f;
-        else if (Input.GetKey(KeyCode.D)) horizontalInput = 1f;
-
+        // Uso Input.GetAxisRaw para input horizontal más confiable
+        horizontalInput = Input.GetAxisRaw("Horizontal");
         isRunning = Input.GetKey(KeyCode.LeftShift);
-        bool wasGrounded = isGrounded;
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+        isGrounded = CheckGrounded();
 
-        // Salto con W
+        // Salto
         if (Input.GetKeyDown(KeyCode.W) && isGrounded)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-            isJumping = true;
-            animator.SetBool("IsJumping", true);
-            PlaySound(jumpSound);
+            PlayOneShotSound(jumpSound);
         }
 
-        // Aterrizaje: cuando estaba en el aire y ahora está en el suelo
-        if (!wasGrounded && isGrounded)
-        {
-            isJumping = false;
-            animator.SetBool("IsJumping", false);
-        }
+        // Actualizo animaciones
+        animator.SetBool("IsJumping", !isGrounded);
 
-        // Animaciones solo si NO está saltando
-        if (!isJumping)
+        if (isGrounded)
         {
-            if (Mathf.Abs(horizontalInput) > 0)
-            {
-                if (isRunning)
-                {
-                    animator.Play("CharRun");
-                    PlaySoundOnce(runSound);
-                }
-                else
-                {
-                    animator.Play("CharWalk");
-                    PlaySoundOnce(walkSound);
-                }
-            }
+            bool isWalking = Mathf.Abs(horizontalInput) > 0.01f && !isRunning;
+            bool isRunningAnim = Mathf.Abs(horizontalInput) > 0.01f && isRunning;
+
+            animator.SetBool("IsWalking", isWalking);
+            animator.SetBool("IsRunning", isRunningAnim);
+
+            if (isRunningAnim)
+                PlayLoopingSound(runSound);
+            else if (isWalking)
+                PlayLoopingSound(walkSound);
             else
-            {
-                animator.Play("CharIddle");
                 StopSound();
-            }
+        }
+        else
+        {
+            animator.SetBool("IsWalking", false);
+            animator.SetBool("IsRunning", false);
+            StopSound();
         }
 
-        // Flip del sprite
+        // Flip solo si hay input horizontal
         if (horizontalInput > 0 && !facingRight)
             Flip();
         else if (horizontalInput < 0 && facingRight)
@@ -101,6 +90,17 @@ public class CharAnimController : MonoBehaviour
         rb.velocity = new Vector2(horizontalInput * speed, rb.velocity.y);
     }
 
+    bool CheckGrounded()
+    {
+        Collider2D[] hits = Physics2D.OverlapCircleAll(groundCheck.position, groundCheckRadius, groundLayer);
+        foreach (Collider2D hit in hits)
+        {
+            if (!hit.isTrigger)
+                return true;
+        }
+        return false;
+    }
+
     void Flip()
     {
         facingRight = !facingRight;
@@ -109,22 +109,22 @@ public class CharAnimController : MonoBehaviour
         transform.localScale = scale;
     }
 
-    void PlaySound(AudioClip clip)
+    void PlayOneShotSound(AudioClip clip)
     {
         if (clip == null) return;
 
-        audioSource.Stop();
-        audioSource.clip = clip;
-        audioSource.Play();
+        audioSource.PlayOneShot(clip);
     }
 
-    void PlaySoundOnce(AudioClip clip)
+    void PlayLoopingSound(AudioClip clip)
     {
         if (clip == null) return;
 
-        if (!audioSource.isPlaying || audioSource.clip != clip)
+        if (audioSource.clip != clip || !audioSource.isPlaying)
         {
-            PlaySound(clip);
+            audioSource.clip = clip;
+            audioSource.loop = true;
+            audioSource.Play();
         }
     }
 
@@ -133,6 +133,8 @@ public class CharAnimController : MonoBehaviour
         if (audioSource.isPlaying)
         {
             audioSource.Stop();
+            audioSource.clip = null;
+            audioSource.loop = false;
         }
     }
 }
