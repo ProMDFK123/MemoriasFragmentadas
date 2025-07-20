@@ -9,7 +9,8 @@ public class DoorInteraction : MonoBehaviour
     [Header("Estado de la puerta")]
     public bool isOpen = false;
     public Transform teleportTarget;
-    public Transform cameraTargetPosition; // nueva posición para la cámara
+    public Transform cameraTargetPosition;
+    public string IDllave = "llave";
 
     [Header("UI")]
     public GameObject dialoguePanel;
@@ -42,10 +43,21 @@ public class DoorInteraction : MonoBehaviour
                 PlaySound(doorOpenSound);
                 TeleportPlayerAndCamera();
             }
-            else if (!showingMessage)
+            else
             {
-                PlaySound(doorLockedSound);
-                StartCoroutine(ShowLockedMessage());
+                // Verifica si el jugador tiene la llave correcta
+                Inventory inventory = player?.GetComponent<Inventory>();
+                if (inventory != null && inventory.HasItem(IDllave))
+                {
+                    isOpen = true;
+                    PlaySound(doorOpenSound);
+                    TeleportPlayerAndCamera();
+                }
+                else if (!showingMessage)
+                {
+                    PlaySound(doorLockedSound);
+                    StartCoroutine(ShowLockedMessage());
+                }
             }
         }
     }
@@ -56,14 +68,20 @@ public class DoorInteraction : MonoBehaviour
         {
             player.transform.position = teleportTarget.position;
 
-            // mover cámara si hay destino asignado
             if (cameraTargetPosition != null)
             {
                 Camera.main.transform.position = new Vector3(
                     cameraTargetPosition.position.x,
                     cameraTargetPosition.position.y,
-                    Camera.main.transform.position.z // mantener z
+                    Camera.main.transform.position.z
                 );
+
+                // Actualizar yReferencePoint en FollowPlayerX
+                FollowPlayerX camFollow = Camera.main.GetComponent<FollowPlayerX>();
+                if (camFollow != null)
+                {
+                    camFollow.yReferencePoint = cameraTargetPosition;
+                }
             }
         }
     }
@@ -86,6 +104,8 @@ public class DoorInteraction : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        Debug.Log("Algo entró en el trigger de la puerta: " + other.name);
+
         if (other.CompareTag("Player"))
         {
             playerInRange = true;

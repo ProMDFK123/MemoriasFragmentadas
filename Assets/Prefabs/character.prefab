@@ -46,6 +46,7 @@ GameObject:
   - component: {fileID: 1467936215574092173}
   - component: {fileID: 5389170267268786097}
   - component: {fileID: 8922963265316171990}
+  - component: {fileID: 4453259197265592949}
   m_Layer: 0
   m_Name: character
   m_TagString: Player
@@ -62,7 +63,7 @@ Transform:
   m_GameObject: {fileID: 7903051785041274653}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.9, y: 19.89, z: 0}
+  m_LocalPosition: {x: -0.9, y: -0.7, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -109,7 +110,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 5
   m_Sprite: {fileID: -1594006884, guid: 010d77d3c8ccf6f46b6c9235601385e8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -333,3 +334,15 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 1
+--- !u!114 &4453259197265592949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7903051785041274653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9599c103bb76f914d891e2b42fc9ed11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
