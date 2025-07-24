@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1743764675073580590}
-  - component: {fileID: 2794893664907289042}
+  - component: {fileID: 1355830693107187624}
   m_Layer: 0
   m_Name: Return_n_Save
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2794893664907289042
+--- !u!114 &1355830693107187624
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,9 +41,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 8097305001562926631}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0f790c53dc0a8149882909b1ab4f061, type: 3}
+  m_Script: {fileID: 11500000, guid: 3cbe4f989df058f4ba6e9d44f325e76d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameSaver: {fileID: 0}
-  mainScene: MainMenu
-  nextScene: LevelSelector
+  menuScene: MainMenu
+  lvlsScene: LevelSelector
+  saver: {fileID: 0}

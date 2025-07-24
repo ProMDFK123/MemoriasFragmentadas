@@ -187,7 +187,11 @@ MonoBehaviour:
     D - Movimiento Derecha
 
     ENTER
-    - Interactuar con Entorno'
+    - Interactuar con Entorno
+
+    ESC - Salir del nivel
+
+    I - Abrir inventario'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4b8019173d8193744a5586d9b9464f61, type: 2}
   m_sharedMaterial: {fileID: -1835648972094459601, guid: 4b8019173d8193744a5586d9b9464f61, type: 2}
@@ -214,7 +218,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 59.1
+  m_fontSize: 50.55
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
