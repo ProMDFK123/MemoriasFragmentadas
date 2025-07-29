@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e18371d3f53fdfe4189f9039292502ab, type: 3}
   m_Name: SoundFrag1
   m_EditorClassIdentifier: 
-  itemName: Llave cocina
   itemID: kitchen
-  desc: Llave que abre la puerta de la cocina
-  icon: {fileID: 1538431470, guid: cfc413d949ad84541bb5c0e78c440b26, type: 3}
+  desc: Una voz familiar atraviesa la niebla del tiempo, llamando con ternura antigua.
+  icon: {fileID: 21300000, guid: 8fea7eb46d1893540bca7c4d12e04283, type: 3}

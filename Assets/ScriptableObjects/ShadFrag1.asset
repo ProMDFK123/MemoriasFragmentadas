@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e18371d3f53fdfe4189f9039292502ab, type: 3}
   m_Name: ShadFrag1
   m_EditorClassIdentifier: 
-  itemName: Llave cocina
-  itemID: kitchen
-  desc: Llave que abre la puerta de la cocina
-  icon: {fileID: 1538431470, guid: cfc413d949ad84541bb5c0e78c440b26, type: 3}
+  itemID: 
+  desc: "Una silueta difusa, quieta en el rinc\xF3n de un recuerdo que ya no tiene
+    forma.\nNo dice nada\u2026 pero todo en ella grita lo que no fue dicho.\nAlgunos
+    vac\xEDos no se llenan; solo se aprenden a mirar de lejos."
+  icon: {fileID: 21300000, guid: bd1e41f7408160b4a9aa0365e532a92f, type: 3}

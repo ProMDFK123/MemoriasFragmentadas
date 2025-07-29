@@ -14,7 +14,8 @@ public class KeyItem : MonoBehaviour
             if (inventory != null)
             {
                 inventory.AddItem(item);
-                Destroy(gameObject);
+                GetComponent<SpriteRenderer>().enabled = false;
+                GetComponent<Collider2D>().enabled = false;
             }
         }
     }

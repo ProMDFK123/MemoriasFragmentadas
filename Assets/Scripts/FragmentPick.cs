@@ -10,7 +10,7 @@ public class FragmentPick : MonoBehaviour
     public AudioClip pickupSound;
 
     [Header("Dialogo")]
-    [TextArea] public string text;
+    [TextArea] public List<string> textLines = new List<string>();
     public float duration = 2.5f;
 
     [Header("UI")]
@@ -36,6 +36,7 @@ public class FragmentPick : MonoBehaviour
 
         // Mostrar diálogo
         if (panel != null && dialogueTxt != null)
+            Debug.Log("Text lines count: " + textLines.Count);
             StartCoroutine(ShowDialogue());
 
         // Ocultar fragmento
@@ -46,8 +47,13 @@ public class FragmentPick : MonoBehaviour
     IEnumerator ShowDialogue()
     {
         panel.SetActive(true);
-        dialogueTxt.text = text;
-        yield return new WaitForSeconds(duration);
+
+        foreach (string line in textLines)
+        {
+            dialogueTxt.text = line;
+            yield return new WaitForSeconds(duration);
+        }
+
         panel.SetActive(false);
     }
 }

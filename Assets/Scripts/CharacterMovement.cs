@@ -49,7 +49,5 @@ public class CharacterMovement : MonoBehaviour
         animator.SetFloat("Speed", speedValue);
         animator.SetFloat("Horizontal", movement.x);
         animator.SetFloat("Vertical", movement.y);
-
-        Debug.Log("Speed: " + speedValue + " | movement: " + movement);
     }
 }
