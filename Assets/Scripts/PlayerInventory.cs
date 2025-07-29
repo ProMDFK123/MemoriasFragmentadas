@@ -6,15 +6,18 @@ public class PlayerInventory : MonoBehaviour
 {
     public List<ItemData> collectedItems = new List<ItemData>();
     public GameObject inventoryUI;
-    public Transform itemSlot;
-    public GameObject itemSlotPrefab;
+    public Transform container;
+    public GameObject pagePrefab;
+
+    private List<GameObject> pages = new List<GameObject>();
+    private int currentPageIndex = 0;
 
     public void AddItem(ItemData item)
     {
         if (!collectedItems.Contains(item))
         {
             collectedItems.Add(item);
-            Debug.Log(item.itemName + "añadido al inventario");
+            Debug.Log("item añadido al inventario");
         }
     }
 
@@ -35,18 +38,54 @@ public class PlayerInventory : MonoBehaviour
         if (!isActive) UpdateInventoryUI();
     }
 
-    void UpdateInventoryUI() {
-        foreach (Transform child in itemSlot) Destroy(child.gameObject);
+    void UpdateInventoryUI()
+    {
+        foreach (Transform child in container) Destroy(child.gameObject);
+        pages.Clear();
 
-        foreach (var item in collectedItems)
+        int itemsPerPage = 4;
+        int totalPages = Mathf.CeilToInt((float)collectedItems.Count / itemsPerPage);
+
+        for (int p = 0; p < totalPages; p++)
         {
-            GameObject slot = Instantiate(itemSlotPrefab, itemSlot);
-            var slotUI = slot.GetComponent<ItemSlotUI>();
-            if (slotUI != null) slotUI.Set(item);
+            GameObject page = Instantiate(pagePrefab, container);
+            page.SetActive(p == 0);
+            pages.Add(page);
+
+            Transform slotPar = page.transform;
+            for (int i = 0; i < itemsPerPage; i++)
+            {
+                int idx = p * itemsPerPage + i;
+                if (idx >= collectedItems.Count) break;
+
+                var item = collectedItems[idx];
+                var slot = slotPar.GetChild(i);
+                var slotUI = slot.GetComponent<ItemSlotUI>();
+                if (slotUI != null) slotUI.Set(item);
+            }
         }
+
+        currentPageIndex = 0;
     }
 
-    public bool HasItem(string id) {
+    public void NextPage()
+    {
+        if (currentPageIndex + 1 >= pages.Count) return;
+        pages[currentPageIndex].SetActive(false);
+        currentPageIndex++;
+        pages[currentPageIndex].SetActive(true);
+    }
+
+    public void PreviousPage()
+    {
+        if (currentPageIndex <= 0) return;
+        pages[currentPageIndex].SetActive(false);
+        currentPageIndex--;
+        pages[currentPageIndex].SetActive(true);
+    }
+
+    public bool HasItem(string id)
+    {
         return collectedItems.Exists(i => i.itemID == id);
     }
 }

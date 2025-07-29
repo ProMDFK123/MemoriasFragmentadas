@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e18371d3f53fdfe4189f9039292502ab, type: 3}
+  m_Name: SoundFrag1
+  m_EditorClassIdentifier: 
+  itemName: Llave cocina
+  itemID: kitchen
+  desc: Llave que abre la puerta de la cocina
+  icon: {fileID: 1538431470, guid: cfc413d949ad84541bb5c0e78c440b26, type: 3}
