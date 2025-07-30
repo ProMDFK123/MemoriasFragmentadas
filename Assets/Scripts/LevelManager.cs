@@ -22,7 +22,11 @@ public class LevelManager : MonoBehaviour
     IEnumerator ShowOutro()
     {
         bg.SetActive(true);
+        Debug.Log("Mostrando outro, texto: " + finalText);
+
         outroTxt.text = finalText;
+
+        yield return null;
 
         if (saver != null) saver.SaveGame();
 

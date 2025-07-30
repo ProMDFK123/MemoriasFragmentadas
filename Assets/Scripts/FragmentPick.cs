@@ -11,11 +11,11 @@ public class FragmentPick : MonoBehaviour
 
     [Header("Dialogo")]
     [TextArea] public List<string> textLines = new List<string>();
-    public float duration = 2.5f;
 
     [Header("UI")]
     public GameObject panel;
     public TextMeshProUGUI dialogueTxt;
+    public float duration = 2f;
 
     private bool collected = false;
 
@@ -24,24 +24,28 @@ public class FragmentPick : MonoBehaviour
         if (collected || !other.CompareTag("Player")) return;
         collected = true;
 
-        // Reproducir sonido
+        // Reproducir sonido al recoger
         AudioSource audioSource = FindObjectOfType<AudioSource>();
-        if (pickupSound && audioSource)
+        if (pickupSound != null && audioSource != null)
             audioSource.PlayOneShot(pickupSound);
 
-        // Actualizar progreso
-        FragmentManager manager = FindObjectOfType<FragmentManager>();
-        if (manager != null)
-            manager.CollectFragment();
-
-        // Mostrar diálogo
-        if (panel != null && dialogueTxt != null)
-            Debug.Log("Text lines count: " + textLines.Count);
-            StartCoroutine(ShowDialogue());
-
-        // Ocultar fragmento
+        // Ocultar visualmente el fragmento
         GetComponent<SpriteRenderer>().enabled = false;
         GetComponent<Collider2D>().enabled = false;
+
+        // Mostrar diálogo y luego actualizar progreso
+        StartCoroutine(HandleFragmentPickup());
+    }
+
+    IEnumerator HandleFragmentPickup()
+    {
+        yield return StartCoroutine(ShowDialogue());
+
+        FragmentManager manager = FindObjectOfType<FragmentManager>();
+        if (manager != null)
+        {
+            manager.CollectFragment();
+        }
     }
 
     IEnumerator ShowDialogue()
