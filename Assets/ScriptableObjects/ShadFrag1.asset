@@ -14,6 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemID: 
   desc: "Una silueta difusa, quieta en el rinc\xF3n de un recuerdo que ya no tiene
-    forma.\nNo dice nada\u2026 pero todo en ella grita lo que no fue dicho.\nAlgunos
-    vac\xEDos no se llenan; solo se aprenden a mirar de lejos."
+    forma."
   icon: {fileID: 21300000, guid: bd1e41f7408160b4a9aa0365e532a92f, type: 3}

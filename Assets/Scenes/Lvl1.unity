@@ -3364,9 +3364,9 @@ MonoBehaviour:
   textLines:
   - "Era su voz\u2026 pero algo en ella no era humano."
   - "Quiz\xE1s era el eco de un recuerdo que ya no me pertenece."
-  duration: 2.5
   panel: {fileID: 327975592}
   dialogueTxt: {fileID: 327975591}
+  duration: 2.5
 --- !u!114 &733417034
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7567,13 +7567,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 118818080707008699, guid: dd636be6cb9e281468c11320684c92c3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1465147495072684912, guid: dd636be6cb9e281468c11320684c92c3, type: 3}
+      propertyPath: saver
+      value: 
+      objectReference: {fileID: 2083100454}
     - target: {fileID: 5600615466608362436, guid: dd636be6cb9e281468c11320684c92c3, type: 3}
       propertyPath: m_Name
       value: Outro
-      objectReference: {fileID: 0}
-    - target: {fileID: 5600615466608362436, guid: dd636be6cb9e281468c11320684c92c3, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7800139042567524469, guid: dd636be6cb9e281468c11320684c92c3, type: 3}
       propertyPath: m_Pivot.x
@@ -7657,33 +7661,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 7800139042567524469, guid: dd636be6cb9e281468c11320684c92c3, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1939105479}
+    m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dd636be6cb9e281468c11320684c92c3, type: 3}
---- !u!114 &1634010540 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2995165662836594160, guid: dd636be6cb9e281468c11320684c92c3, type: 3}
-  m_PrefabInstance: {fileID: 1634010539}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!224 &1634010541 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 7800139042567524469, guid: dd636be6cb9e281468c11320684c92c3, type: 3}
-  m_PrefabInstance: {fileID: 1634010539}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1634010542 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 118818080707008699, guid: dd636be6cb9e281468c11320684c92c3, type: 3}
-  m_PrefabInstance: {fileID: 1634010539}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1640043421
 GameObject:
   m_ObjectHideFlags: 0
@@ -7913,10 +7893,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pickupSound: {fileID: 8300000, guid: e5458c5b8cd86e44881d17fc344f4fea, type: 3}
-  textLines: []
-  duration: 2.5
+  textLines:
+  - "Nunca volvi\xF3\u2026 pero su eco nunca se fue."
+  - "No recuerdo su rostro, pero s\xED el dolor de olvidarlo."
   panel: {fileID: 327975592}
   dialogueTxt: {fileID: 327975591}
+  duration: 2.5
 --- !u!114 &1647713994
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10429,56 +10411,17 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.518034, y: 7.122757}
   m_EdgeRadius: 0
---- !u!1 &1939105477
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1939105479}
-  - component: {fileID: 1939105478}
-  m_Layer: 0
-  m_Name: OutroManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1939105478
+--- !u!114 &1939105478 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 1465147495072684912, guid: dd636be6cb9e281468c11320684c92c3, type: 3}
+  m_PrefabInstance: {fileID: 1634010539}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1939105477}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 685ab9534671c45409b572e2d83b78ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bg: {fileID: 1634010542}
-  outroTxt: {fileID: 1634010540}
-  finalText: nivel completado
-  display: 3
-  nextScene: LevelSelector
-  saver: {fileID: 2083100454}
---- !u!4 &1939105479
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1939105477}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1634010541}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1945189312
 GameObject:
   m_ObjectHideFlags: 0
